@@ -5,7 +5,6 @@ import { demoProfilePicture } from '../utils/constants.js';
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
   let i = channelDetail?.snippet?.thumbnails?.high?.url;
-  console.log(i);
   return (
     <Box
       sx={{
