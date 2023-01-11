@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player';
 import { Typography, Box, Stack } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
 
-import { Videos } from './';
+import { Videos, Loader } from './';
 import { fetchAPI } from '../utils/fetchAPI.js';
 
 const VideoDetail = () => {
@@ -21,7 +21,7 @@ const VideoDetail = () => {
     );
   }, [id]);
 
-  if (!videoDetail?.snippet) return 'Loading..';
+  if (!videoDetail?.snippet) return <Loader />;
   const {
     snippet: { title, channelId, channelTitle },
     statistics: { viewCount, likeCount },

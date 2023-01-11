@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
 import { categories } from '../utils/constants.js';
 
 const Sidebar = ({ selectedCategory, setselectedCategory }) => (
@@ -9,6 +9,7 @@ const Sidebar = ({ selectedCategory, setselectedCategory }) => (
       overflowY: 'auto', // set the overflow-y style to 'auto'
       height: { sx: 'auto', md: '95%' }, // set the height style to 'auto' for small screens and '95%' for medium screens
       flexDirection: { md: 'column' }, // set the flex-direction style to 'column' for medium screens
+      background: '#413F42',
     }}
   >
     {
@@ -19,15 +20,15 @@ const Sidebar = ({ selectedCategory, setselectedCategory }) => (
           onClick={() => setselectedCategory(category.name)}
           style={{
             // set the background color to red and the text color to white if the current category's name is equal to the selectedCategory constant
-            background: category.name === selectedCategory && '#FC1503',
-            color: 'white',
+            background: category.name === selectedCategory && '#16003B',
+            color: '#F73D93',
           }}
           key={category.name} // set the key prop to the current category's name
         >
           <span
             style={{
               // set the color to white if the current category's name is equal to the selectedCategory constant, and set the margin-right to '15px'
-              color: category.name === selectedCategory ? 'white' : 'red',
+              color: category.name === selectedCategory ? '#F73D93' : 'red',
               marginRight: '15px',
             }}
           >
@@ -39,7 +40,7 @@ const Sidebar = ({ selectedCategory, setselectedCategory }) => (
               opacity: category.name === selectedCategory ? '1' : '0.8',
             }}
           >
-            {category.name}
+            {category.name !== 'New' ? category.name : 'Home'}
           </span>
         </button>
       ))
