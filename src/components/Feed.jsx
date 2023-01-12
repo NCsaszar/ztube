@@ -18,6 +18,7 @@ const Feed = () => {
           height: { sx: 'auto', md: '92vh' },
           borderRight: '1px solid #3d3d3d',
           px: { sx: 0, md: 2 },
+          background: '#413F42',
         }}
       >
         <Sidebar
@@ -38,9 +39,7 @@ const Feed = () => {
           fontWeight='bold'
           mb={2}
           sx={{ color: 'white' }}
-        >
-          {selectedCategory} <span style={{ color: '#F73D93' }}>videos</span>
-        </Typography>
+        ></Typography>
         <Videos videos={videos} />
       </Box>
     </Stack>

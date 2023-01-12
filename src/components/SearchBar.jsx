@@ -40,7 +40,16 @@ const SearchBar = () => {
           setSearchTerm(e.target.value);
         }}
       />
-      <IconButton type='submit' sx={{ p: '10px', color: '#F73D93' }}>
+      <IconButton
+        type='submit'
+        sx={{
+          p: '10px',
+          color: 'white',
+          background: '#272628',
+          borderTopLeftRadius: 0,
+          borderBottomLeftRadius: 0,
+        }}
+      >
         <Search />
       </IconButton>
     </Paper>

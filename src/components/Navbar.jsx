@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#413F42',
+      main: '#272628',
     },
   },
 });
@@ -31,10 +31,10 @@ export default function Navbar2() {
                 aria-label='open drawer'
                 sx={{ mr: 2 }}
               >
-                <MenuIcon sx={{ color: '#F73D93' }} />
+                <MenuIcon sx={{ color: '#472c55', fontSize: '32px' }} />
               </IconButton>
               <Link to='/' style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={logo} alt='logo' height='45' width='45' />
+                <img src={logo} alt='logo' height='35' width='35' />
               </Link>
             </Box>
             <Box
