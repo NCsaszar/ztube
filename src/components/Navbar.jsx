@@ -34,8 +34,8 @@ const ResponsiveImg = styled.img`
 export default function Navbar({ setOpenMenu, openMenu }) {
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='static' color='primary'>
+      <Box sx={{ flexGrow: 1, paddingBottom: '65px' }}>
+        <AppBar position='fixed' color='primary'>
           <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <IconButton

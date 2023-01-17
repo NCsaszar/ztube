@@ -14,7 +14,7 @@ const SearchFeed = () => {
     });
   }, [searchTerm]);
   return (
-    <Box p={10} sx={{ overflowY: 'auto', height: '90vh', flex: 2 }}>
+    <Box sx={{ overflowY: 'auto', height: '90vh', flex: 2 }}>
       <Videos videos={videos} />
     </Box>
   );

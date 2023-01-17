@@ -42,7 +42,7 @@ const Feed = ({ openMenu }) => {
           </Typography>
         </Box>
       </CSSTransition>
-      <Box p={10} sx={{ overflowY: 'auto', height: '90vh', flex: 2 }}>
+      <Box p={7} sx={{ overflowY: 'auto', height: '90vh', flex: 2 }}>
         <Videos videos={videos} />
       </Box>
     </Stack>
