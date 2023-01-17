@@ -36,7 +36,7 @@ a {
 
 .react-player {
   height: 77vh !important;
-  width: 100% !important;
+  width: 95% !important;
 }
 
 .search-bar {
@@ -68,9 +68,17 @@ a {
   }
 }
 
-@media screen and (max-width: 800px) {
-  .copyright {
+@media screen and (max-width: 900px) {
+  .github {
     display: none !important;
+  }
+}
+.search-bar {
+  width: 360px;
+}
+@media screen and (max-width: 900px) {
+  .search-bar {
+    width: 100%;
   }
 }
 
@@ -82,7 +90,22 @@ a {
   .react-player {
     height: 45vh !important;
   }
-  .search-bar {
-    width: 200px;
-  }
+}
+
+.menu-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.menu-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.menu-exit {
+  opacity: 1;
+}
+.menu-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 300ms, transform 300ms;
 }

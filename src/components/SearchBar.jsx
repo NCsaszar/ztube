@@ -24,15 +24,20 @@ const SearchBar = () => {
       }}
       sx={{
         borderRadius: 20,
-        border: '1px solid #e3e3e3',
+        border: '1px solid gray',
         pl: 2,
         boxShadow: 'none',
-        mr: { sm: 5 },
+        mr: { sm: '5px' },
         background: '#413F42',
+        display: 'flex',
+        direction: 'row',
       }}
     >
       <input
-        style={{ background: '#413F42', color: 'white' }}
+        style={{
+          background: '#413F42',
+          color: 'white',
+        }}
         className='search-bar'
         placeholder='Search...'
         value={searchTerm}
@@ -48,6 +53,9 @@ const SearchBar = () => {
           background: '#272628',
           borderTopLeftRadius: 0,
           borderBottomLeftRadius: 0,
+          ':hover': {
+            background: '#272628',
+          },
         }}
       >
         <Search />

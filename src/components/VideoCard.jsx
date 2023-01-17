@@ -8,51 +8,71 @@ import {
   demoChannelUrl,
   demoChannelTitle,
 } from '../utils/constants.js';
+import { useState } from 'react';
 
 const VideoCard = ({
   video: {
     id: { videoId },
     snippet,
   },
+  vidPage,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const cardContentStyles = {
+    backgroundColor: '#1E1E1E',
+    height: { xs: '50px', sm: '230px', md: '100px' },
+    width: { xs: '100%', sm: '358px' },
+  };
+
   return (
     <Card
       sx={{
-        width: { xs: '100%', sm: '358px', md: '320px' },
-        height: { xs: 'auto', sm: '230', md: '200px' },
-        boxShadow: 'none',
         borderRadius: 5,
+        display: 'flex',
+        direction: 'column',
+        transition: 'transform 0.2s',
+        ':hover': {
+          transform: 'scale(1.2)',
+        },
+        overflow: 'hidden',
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <Box sx={{ display: 'flex', direction: 'column' }}>
+      <Box>
         <Link to={videoId ? `/video/${videoId}` : `/video/cV2gBU6hKfY`}>
           <CardMedia
-            image={snippet?.thumbnails?.high?.url || demoThumbnailUrl}
+            component='img'
+            image={snippet?.thumbnails?.medium?.url || demoThumbnailUrl}
             alt={snippet?.title}
-            sx={{ width: { xs: '100%', sm: '358px' }, height: 180 }}
+            sx={{
+              height: { xs: '100%', md: '180px' },
+            }}
           />
         </Link>
-        <CardContent sx={{ backgroundColor: '#1E1E1E', height: '106px' }}>
-          <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
-            <Typography variant='subtitle1' fontWeight='bold' color='#FFF'>
-              {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
-            </Typography>
-          </Link>
-          <Link
-            to={
-              snippet?.channelId
-                ? `/channel/${snippet?.channelId}`
-                : demoChannelUrl
-            }
-          >
-            <Typography variant='subtitle2' color='gray'>
-              {snippet?.channelTitle || demoChannelTitle}
-              <CheckCircle
-                sx={{ fontSize: '12px', color: 'gray', ml: '5px' }}
-              />
-            </Typography>
-          </Link>
-        </CardContent>
+        {isHovered && !vidPage ? (
+          <CardContent sx={cardContentStyles}>
+            <Link to={videoId ? `/video/${videoId}` : demoVideoUrl}>
+              <Typography variant='subtitle1' fontWeight='bold' color='#FFF'>
+                {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
+              </Typography>
+            </Link>
+            <Link
+              to={
+                snippet?.channelId
+                  ? `/channel/${snippet?.channelId}`
+                  : demoChannelUrl
+              }
+            >
+              <Typography variant='subtitle2' color='gray'>
+                {snippet?.channelTitle || demoChannelTitle}
+                <CheckCircle
+                  sx={{ fontSize: '12px', color: 'gray', ml: '5px' }}
+                />
+              </Typography>
+            </Link>
+          </CardContent>
+        ) : null}
       </Box>
     </Card>
   );

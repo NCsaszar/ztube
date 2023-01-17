@@ -7,19 +7,22 @@ import {
   ChannelDetail,
   SearchFeed,
 } from './components/';
+import { useState } from 'react';
 
-const App = () => (
-  <BrowserRouter>
-    <Box sx={{ backgroundColor: '#7F8487' }}>
-      <Navbar />
-      <Routes>
-        <Route path='/' exact element={<Feed />} />
-        <Route path='/video/:id' element={<VideoDetail />} />
-        <Route path='/channel/:id' element={<ChannelDetail />} />
-        <Route path='/search/:searchTerm' element={<SearchFeed />} />
-      </Routes>
-    </Box>
-  </BrowserRouter>
-);
-
+const App = () => {
+  const [openMenu, setOpenMenu] = useState(false);
+  return (
+    <BrowserRouter>
+      <Box sx={{ backgroundColor: '#7F8487' }}>
+        <Navbar setOpenMenu={setOpenMenu} openMenu={openMenu} />
+        <Routes>
+          <Route path='/' exact element={<Feed openMenu={openMenu} />} />
+          <Route path='/video/:id' element={<VideoDetail />} />
+          <Route path='/channel/:id' element={<ChannelDetail />} />
+          <Route path='/search/:searchTerm' element={<SearchFeed />} />
+        </Routes>
+      </Box>
+    </BrowserRouter>
+  );
+};
 export default App;

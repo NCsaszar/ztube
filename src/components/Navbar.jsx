@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { logo } from '../utils/constants.js';
 import SearchBar from './SearchBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import styled from 'styled-components';
 
 const theme = createTheme({
   palette: {
@@ -17,7 +18,20 @@ const theme = createTheme({
   },
 });
 
-export default function Navbar2() {
+const LinkWrapper = styled(Link)`
+  display: flex;
+  align-items: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const ResponsiveImg = styled.img`
+  @media (max-width: 768px) {
+    visibility: hidden;
+  }
+`;
+
+export default function Navbar({ setOpenMenu, openMenu }) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
@@ -30,12 +44,16 @@ export default function Navbar2() {
                 color='inherit'
                 aria-label='open drawer'
                 sx={{ mr: 2 }}
+                onClick={() => setOpenMenu(!openMenu)}
               >
-                <MenuIcon sx={{ color: '#472c55', fontSize: '32px' }} />
+                <MenuIcon sx={{ color: 'white', fontSize: '32px' }} />
               </IconButton>
-              <Link to='/' style={{ display: 'flex', alignItems: 'center' }}>
-                <img src={logo} alt='logo' height='35' width='35' />
-              </Link>
+              <LinkWrapper
+                to='/'
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+                <ResponsiveImg src={logo} alt='logo' height='35' width='35' />
+              </LinkWrapper>
             </Box>
             <Box
               sx={{
