@@ -6,7 +6,6 @@ import {
   VideoDetail,
   ChannelDetail,
   SearchFeed,
-  MenuSidebar,
 } from './components/';
 import { useState } from 'react';
 
@@ -28,7 +27,10 @@ const App = () => {
             exact
             element={<Feed openMenu={openMenu} openMenu2={openMenu2} />}
           />
-          <Route path='/video/:id' element={<VideoDetail />} />
+          <Route
+            path='/video/:id'
+            element={<VideoDetail openMenu={openMenu} openMenu2={openMenu2} />}
+          />
           <Route path='/channel/:id' element={<ChannelDetail />} />
           <Route path='/search/:searchTerm' element={<SearchFeed />} />
         </Routes>

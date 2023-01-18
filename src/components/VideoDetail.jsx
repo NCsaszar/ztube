@@ -4,11 +4,13 @@ import { Link, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { Typography, Box, Stack } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
-
+import Menus from './Menus';
 import { Videos, Loader } from './';
 import { fetchAPI } from '../utils/fetchAPI.js';
 
-const VideoDetail = () => {
+const VideoDetail = ({ openMenu, openMenu2 }) => {
+  const [selectedCategory, setselectedCategory] = useState('New');
+  const [selectedCategory2, setselectedCategory2] = useState('History');
   const [videoDetail, setVideoDetail] = useState(null);
   const [videos, setVideos] = useState(null);
   const { id } = useParams();
@@ -29,6 +31,22 @@ const VideoDetail = () => {
 
   return (
     <Box minHeight='95vh'>
+      <Stack
+        sx={{
+          position: 'fixed',
+          zIndex: 1000,
+          flexDirection: { sx: 'column', md: 'row' },
+        }}
+      >
+        <Menus
+          openMenu={openMenu}
+          openMenu2={openMenu2}
+          selectedCategory={selectedCategory}
+          setselectedCategory={setselectedCategory}
+          selectedCategory2={selectedCategory2}
+          setselectedCategory2={setselectedCategory2}
+        />
+      </Stack>
       <Stack direction={{ xs: 'column', md: 'row' }}>
         <Box flex={1}>
           <Box
