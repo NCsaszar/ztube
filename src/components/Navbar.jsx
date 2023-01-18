@@ -9,6 +9,7 @@ import { logo } from '../utils/constants.js';
 import SearchBar from './SearchBar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styled from 'styled-components';
+import Button from '@mui/material/Button';
 
 const theme = createTheme({
   palette: {
@@ -31,13 +32,25 @@ const ResponsiveImg = styled.img`
   }
 `;
 
-export default function Navbar({ setOpenMenu, openMenu }) {
+export default function Navbar({
+  setOpenMenu,
+  openMenu,
+  setOpenMenu2,
+  openMenu2,
+}) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1, paddingBottom: '65px' }}>
         <AppBar position='fixed' color='primary'>
           <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 2,
+              }}
+            >
               <IconButton
                 size='large'
                 edge='start'
@@ -48,6 +61,16 @@ export default function Navbar({ setOpenMenu, openMenu }) {
               >
                 <MenuIcon sx={{ color: 'white', fontSize: '32px' }} />
               </IconButton>
+              <Button
+                onClick={() => setOpenMenu2(!openMenu2)}
+                sx={{
+                  color: 'white',
+                  bgcolor: '#413f42',
+                  ':hover': { bgcolor: '#413f42' },
+                }}
+              >
+                Explore
+              </Button>
               <LinkWrapper
                 to='/'
                 style={{ display: 'flex', alignItems: 'center' }}

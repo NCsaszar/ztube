@@ -9,19 +9,31 @@ const ChannelDetail = () => {
   const [videos, setVideos] = useState([]);
   const [banner, setBanner] = useState(null);
   const { id } = useParams();
-  useEffect(() => {
-    fetchAPI(`channels?part=snippet&id=${id}`).then((data) => {
+
+  const getChannelDetails = async () => {
+    await fetchAPI(`channels?part=snippet&id=${id}`).then((data) => {
       setChannelDetail(data?.items[0]);
     });
-    fetchAPI(`search?channelId=${id}&&part=snippet&order=date`).then((data) => {
-      setVideos(data?.items);
-    });
-    fetchAPI(`channels?part=snippet,statistics&id=${id}`).then((data) => {
+  };
+  const getVideos = async () => {
+    await fetchAPI(`search?channelId=${id}&&part=snippet&order=date`).then(
+      (data) => {
+        setVideos(data?.items);
+      }
+    );
+  };
+  const getBanner = async () => {
+    await fetchAPI(`channels?part=snippet,statistics&id=${id}`).then((data) => {
       setBanner(data?.items[0].brandingSettings.image.bannerExternalUrl);
     });
+  };
+  useEffect(() => {
+    getChannelDetails();
+    getVideos();
+    getBanner();
   }, [id]);
 
-  if (!banner) return <Loader />;
+  // if (!banner) return <Loader />;
   return (
     <Box minHeight='95vh'>
       <Box>
@@ -43,17 +55,7 @@ const ChannelDetail = () => {
             }}
           />
         </div>
-        {/* <img
-          style={{
-            zIndex: 1,
-            height: '300px',
-            // width: '80%',
-            left: '10%',
-            position: 'relative',
-          }}
-          alt={banner}
-          src={banner}
-        /> */}
+
         <ChannelCard channelDetail={channelDetail} marginTop={'-93px'} />
         <Box display='flex' p='2'>
           <Box sx={{ mr: { sm: '100px' } }} />

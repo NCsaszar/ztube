@@ -1,10 +1,12 @@
 import { Box, CardContent, CardMedia, Typography } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { demoProfilePicture } from '../utils/constants.js';
+import { Loader } from './';
+// import { demoProfilePicture } from '../utils/constants.js';
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
   let i = channelDetail?.snippet?.thumbnails?.high?.url;
+  if (!i) return <Loader />;
   return (
     <Box
       sx={{
@@ -19,44 +21,42 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
         marginTop,
       }}
     >
-      <Link to={`/channel/${channelDetail?.id?.channelId}`}>
-        <CardContent
+      <CardContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          textAlign: 'center',
+          color: '#fff',
+        }}
+      >
+        {/* {console.log(i)} */}
+        <CardMedia
+          component='img'
+          image={i}
+          alt={channelDetail?.snippet?.title}
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            textAlign: 'center',
-            color: '#fff',
+            borderRadius: '50%',
+            height: '180px',
+            width: '180px',
+            mb: 2,
+            border: '1px solid #e3e3e3',
+            zIndex: '10',
           }}
-        >
-          <CardMedia
-            image={i || demoProfilePicture}
-            alt={channelDetail?.snippet?.title}
-            sx={{
-              borderRadius: '50%',
-              height: '180px',
-              width: '180px',
-              mb: 2,
-              border: '1px solid #e3e3e3',
-              zIndex: '10',
-            }}
-          />
-          <Typography variant='h6'>
-            {channelDetail?.snippet?.title}{' '}
-            <CheckCircle sx={{ fontSize: '14px', color: 'gray', ml: '5px' }} />
+        />
+        <Typography variant='h6'>
+          {channelDetail?.snippet?.title}{' '}
+          <CheckCircle sx={{ fontSize: '14px', color: 'gray', ml: '5px' }} />
+        </Typography>
+        {channelDetail?.statistics?.subscriberCount && (
+          <Typography sx={{ fontSize: '15px', fontWeight: 500, color: 'gray' }}>
+            {parseInt(
+              channelDetail?.statistics?.subscriberCount
+            ).toLocaleString('en-US')}{' '}
+            Subscribers
           </Typography>
-          {channelDetail?.statistics?.subscriberCount && (
-            <Typography
-              sx={{ fontSize: '15px', fontWeight: 500, color: 'gray' }}
-            >
-              {parseInt(
-                channelDetail?.statistics?.subscriberCount
-              ).toLocaleString('en-US')}{' '}
-              Subscribers
-            </Typography>
-          )}
-        </CardContent>
-      </Link>
+        )}
+      </CardContent>
     </Box>
   );
 };
