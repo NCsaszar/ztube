@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
-import { Videos, ChannelCard, Loader } from './';
+import { Videos, ChannelCard, Loader } from './index.js';
 import { fetchAPI } from '../utils/fetchAPI.js';
 
 const ChannelDetail = () => {
@@ -16,11 +16,9 @@ const ChannelDetail = () => {
     });
   };
   const getVideos = async () => {
-    await fetchAPI(`search?channelId=${id}&&part=snippet&order=date`).then(
-      (data) => {
-        setVideos(data?.items);
-      }
-    );
+    await fetchAPI(`search?channelId=${id}&&part=snippet&order=date`).then((data) => {
+      setVideos(data?.items);
+    });
   };
   const getBanner = async () => {
     await fetchAPI(`channels?part=snippet,statistics&id=${id}`).then((data) => {
