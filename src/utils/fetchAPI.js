@@ -1,12 +1,14 @@
 import axios from 'axios';
+const rapidAPIKey = import.meta.env.VITE_X_RapidAPI_Key;
+const rapidAPIHost = import.meta.env.VITE_X_RapidAPI_Host;
 
-const API_URL = 'https://youtube-v31.p.rapidapi.com';
+const API_URL = 'https://youtube-v311.p.rapidapi.com';
 const options = {
   url: API_URL,
   params: { maxResults: '50', part: 'snippet,id', regionCode: 'US' },
   headers: {
-    'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
-    'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com',
+    'X-RapidAPI-Key': rapidAPIKey,
+    'X-RapidAPI-Host': rapidAPIHost,
   },
 };
 

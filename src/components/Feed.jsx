@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Box, Stack } from '@mui/material';
-import { Videos } from './';
+import { Videos } from './index.js';
 import { fetchAPI } from '../utils/fetchAPI.js';
-import Menus from './Menus';
+import Menus from './Menus.jsx';
 
 const Feed = ({ openMenu, openMenu2 }) => {
   const [selectedCategory, setselectedCategory] = useState('New');
