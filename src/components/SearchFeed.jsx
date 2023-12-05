@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { Videos } from './';
+import { Videos } from './index.js';
 import { fetchAPI } from '../utils/fetchAPI.js';
 import { useParams } from 'react-router-dom';
 

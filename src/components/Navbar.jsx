@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { logo } from '../utils/constants.js';
-import SearchBar from './SearchBar';
+import SearchBar from './SearchBar.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
@@ -32,12 +32,7 @@ const ResponsiveImg = styled.img`
   }
 `;
 
-export default function Navbar({
-  setOpenMenu,
-  openMenu,
-  setOpenMenu2,
-  openMenu2,
-}) {
+export default function Navbar({ setOpenMenu, openMenu, setOpenMenu2, openMenu2 }) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1, paddingBottom: '65px' }}>
@@ -71,10 +66,7 @@ export default function Navbar({
               >
                 Explore
               </Button>
-              <LinkWrapper
-                to='/'
-                style={{ display: 'flex', alignItems: 'center' }}
-              >
+              <LinkWrapper to='/' style={{ display: 'flex', alignItems: 'center' }}>
                 <ResponsiveImg src={logo} alt='logo' height='35' width='35' />
               </LinkWrapper>
             </Box>
