@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { categories } from '../utils/constants.js';
+import { categories } from '../utils/constants.jsx';
 
 const Sidebar = ({ selectedCategory, setselectedCategory }) => (
   // Stack component with props applied

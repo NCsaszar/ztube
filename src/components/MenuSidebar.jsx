@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import { categories } from '../utils/menulogos.js';
+import { categories } from '../utils/menulogos.jsx';
 
 const MenuSidebar = ({ selectedCategory2, setselectedCategory2 }) => (
   // Stack component with props applied
@@ -27,8 +27,7 @@ const MenuSidebar = ({ selectedCategory2, setselectedCategory2 }) => (
           <span
             style={{
               // set the color to white if the current category's name is equal to the selectedCategory2 constant, and set the margin-right to '15px'
-              color:
-                category.name === selectedCategory2 ? '#472c55' : '#272628',
+              color: category.name === selectedCategory2 ? '#472c55' : '#272628',
               marginRight: '15px',
             }}
           >

@@ -1,39 +1,23 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import ReactPlayer from 'react-player';
-import { Typography, Box, Stack } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Box, Stack } from '@mui/material';
 import Menus from './Menus.jsx';
-import { Videos, Loader } from './index.js';
-import { fetchAPI } from '../utils/fetchAPI.js';
+import { Loader, Videos } from './index.js';
+import VideoPlayer from './VideoPlayer.jsx'; // New sub-component
+import VideoInfo from './VideoInfo.jsx'; // New sub-component
+import { useVideoData } from '../hooks/useVideoData.js'; // Custom hook for data fetching
 
 const VideoDetail = ({ openMenu, openMenu2 }) => {
   const [selectedCategory, setselectedCategory] = useState('New');
   const [selectedCategory2, setselectedCategory2] = useState('History');
-  const [videoDetail, setVideoDetail] = useState(null);
-  const [videos, setVideos] = useState(null);
   const { id } = useParams();
-  useEffect(() => {
-    fetchAPI(`videos?part=snippet,statistics&id=${id}`).then((data) => setVideoDetail(data.items[0]));
-    fetchAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`).then((data) => setVideos(data.items));
-  }, [id]);
+  const { videoDetail, videos, loading } = useVideoData(id);
 
-  if (!videoDetail?.snippet) return <Loader />;
-  const {
-    snippet: { title, channelId, channelTitle },
-    statistics: { viewCount, likeCount },
-  } = videoDetail;
+  if (loading) return <Loader />;
 
   return (
     <Box minHeight='95vh'>
-      <Stack
-        sx={{
-          position: 'fixed',
-          zIndex: 1000,
-          flexDirection: { sx: 'column', md: 'row' },
-        }}
-      >
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={0}>
         <Menus
           openMenu={openMenu}
           openMenu2={openMenu2}
@@ -42,42 +26,19 @@ const VideoDetail = ({ openMenu, openMenu2 }) => {
           selectedCategory2={selectedCategory2}
           setselectedCategory2={setselectedCategory2}
         />
-      </Stack>
-      <Stack direction={{ xs: 'column', md: 'row' }}>
-        <Box flex={1}>
-          <Box sx={{ width: '100%', position: 'sticky', top: '86px', px: '10px' }}>
-            <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`} className='react-player' controls />
-            <Box
-              sx={{
-                backgroundColor: '#272628',
-                width: { md: '95%', xs: 'auto' },
-                height: { md: '130px' },
-              }}
-            >
-              <Typography color='#fff' variant='h5' fontWeight='bold' p={2}>
-                {title}
-              </Typography>
-              <Stack direction='row' justifyContent='space-between' sx={{ color: '#fff' }} py={1} px={2}>
-                <Link to={`/channel/${channelId}`}>
-                  <Typography variant={{ sm: 'subtitle1', md: 'h6' }} color='#fff'>
-                    {channelTitle}
-                    <CheckCircle sx={{ fontSize: '12px', color: 'gray', ml: '5px' }} />
-                  </Typography>
-                </Link>
-                <Stack direction='row' gap='20px' alignItems='center'>
-                  <Typography variant='body1' sx={{ opacity: 0.7 }}>
-                    {parseInt(viewCount).toLocaleString()} views
-                  </Typography>
-                  <Typography variant='body1' sx={{ opacity: 0.7 }}>
-                    {parseInt(likeCount).toLocaleString()} likes
-                  </Typography>
-                </Stack>
-              </Stack>
-            </Box>
+        <Box sx={{ py: '20px', px: '20px', width: '100%', display: 'flex' }}>
+          <Box
+            flex={1}
+            sx={{
+              maxWidth: '75%',
+            }}
+          >
+            <VideoPlayer videoId={id} />
+            <VideoInfo videoDetail={videoDetail} />
           </Box>
-        </Box>
-        <Box px={5} py={{ md: 1, xs: 5 }} justifyContent='center' alignItems='center' borderLeft='2px solid #272628'>
-          <Videos videos={videos} direction='column' vidPage={true} />
+          <Box px={8} py={{ md: 1, xs: 5, overflowY: 'auto', maxHeight: 'calc(100vh - 100px)' }}>
+            <Videos videos={videos} direction='column' vidPage={true} recommended={true} />
+          </Box>
         </Box>
       </Stack>
     </Box>

@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import { logo } from '../utils/constants.js';
+import { logo } from '../utils/constants.jsx';
 import SearchBar from './SearchBar.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import styled from 'styled-components';

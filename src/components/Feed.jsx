@@ -10,10 +10,13 @@ const Feed = ({ openMenu, openMenu2 }) => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetchAPI(`search?&q=${selectedCategory}`).then((data) => {
+    fetchAPI('search', {
+      q: selectedCategory,
+    }).then((data) => {
       setVideos(data.items);
     });
   }, [selectedCategory]);
+
   return (
     <Stack sx={{ flexDirection: { sx: 'column', md: 'row' } }}>
       <Menus

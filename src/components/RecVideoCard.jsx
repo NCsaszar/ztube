@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Card, CardMedia } from '@mui/material';
 import { useState } from 'react';
-import { default as VideoCardInfo } from './VideoCardInfo';
-const VideoCard = ({ video, vidPage }) => {
+import RecVideoCardInfo from './RecVideoCardInfo';
+const RecVideoCard = ({ video, vidPage }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const {
-    id: { videoId },
-    snippet,
-  } = video;
+  const { video_id, title, thumbnails } = video;
 
   return (
     <Card
@@ -25,19 +22,19 @@ const VideoCard = ({ video, vidPage }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link to={videoId ? `/video/${videoId}` : `/video/cV2gBU6hKfY`}>
+      <Link to={video_id ? `/video/${video_id}` : `/video/cV2gBU6hKfY`}>
         <CardMedia
           component='img'
-          image={snippet?.thumbnails?.medium?.url}
-          alt={snippet?.title}
+          image={thumbnails[1].url}
+          alt={title}
           sx={{
             height: { xs: '100%', md: '180px' },
           }}
         />
       </Link>
-      <VideoCardInfo isHovered={isHovered} snippet={snippet} videoId={videoId} />
+      <RecVideoCardInfo isHovered={isHovered} video={video} videoId={video_id} />
     </Card>
   );
 };
 
-export default VideoCard;
+export default RecVideoCard;
